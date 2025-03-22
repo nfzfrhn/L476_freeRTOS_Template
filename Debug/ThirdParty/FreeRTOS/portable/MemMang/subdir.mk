@@ -5,35 +5,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/main.c \
-../Core/Src/stm32l4xx_hal_msp.c \
-../Core/Src/stm32l4xx_it.c \
-../Core/Src/syscalls.c \
-../Core/Src/system_stm32l4xx.c 
+../ThirdParty/FreeRTOS/portable/MemMang/heap_4.c 
 
 OBJS += \
-./Core/Src/main.o \
-./Core/Src/stm32l4xx_hal_msp.o \
-./Core/Src/stm32l4xx_it.o \
-./Core/Src/syscalls.o \
-./Core/Src/system_stm32l4xx.o 
+./ThirdParty/FreeRTOS/portable/MemMang/heap_4.o 
 
 C_DEPS += \
-./Core/Src/main.d \
-./Core/Src/stm32l4xx_hal_msp.d \
-./Core/Src/stm32l4xx_it.d \
-./Core/Src/syscalls.d \
-./Core/Src/system_stm32l4xx.d 
+./ThirdParty/FreeRTOS/portable/MemMang/heap_4.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-Core/Src/%.o Core/Src/%.su Core/Src/%.cyclo: ../Core/Src/%.c Core/Src/subdir.mk
+ThirdParty/FreeRTOS/portable/MemMang/%.o ThirdParty/FreeRTOS/portable/MemMang/%.su ThirdParty/FreeRTOS/portable/MemMang/%.cyclo: ../ThirdParty/FreeRTOS/portable/MemMang/%.c ThirdParty/FreeRTOS/portable/MemMang/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS/include" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS" -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
-clean: clean-Core-2f-Src
+clean: clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-MemMang
 
-clean-Core-2f-Src:
-	-$(RM) ./Core/Src/main.cyclo ./Core/Src/main.d ./Core/Src/main.o ./Core/Src/main.su ./Core/Src/stm32l4xx_hal_msp.cyclo ./Core/Src/stm32l4xx_hal_msp.d ./Core/Src/stm32l4xx_hal_msp.o ./Core/Src/stm32l4xx_hal_msp.su ./Core/Src/stm32l4xx_it.cyclo ./Core/Src/stm32l4xx_it.d ./Core/Src/stm32l4xx_it.o ./Core/Src/stm32l4xx_it.su ./Core/Src/syscalls.cyclo ./Core/Src/syscalls.d ./Core/Src/syscalls.o ./Core/Src/syscalls.su ./Core/Src/system_stm32l4xx.cyclo ./Core/Src/system_stm32l4xx.d ./Core/Src/system_stm32l4xx.o ./Core/Src/system_stm32l4xx.su
+clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-MemMang:
+	-$(RM) ./ThirdParty/FreeRTOS/portable/MemMang/heap_4.cyclo ./ThirdParty/FreeRTOS/portable/MemMang/heap_4.d ./ThirdParty/FreeRTOS/portable/MemMang/heap_4.o ./ThirdParty/FreeRTOS/portable/MemMang/heap_4.su
 
-.PHONY: clean-Core-2f-Src
+.PHONY: clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-MemMang
 
