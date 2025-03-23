@@ -2,5 +2,5 @@
 ../Core/Src/main.c:133:6:SystemClock_Config	4
 ../Core/Src/main.c:183:13:MX_GPIO_Init	1
 ../Core/Src/main.c:226:6:task1_handler	1
-../Core/Src/main.c:233:6:task2_handler	1
-../Core/Src/main.c:245:6:Error_Handler	1
+../Core/Src/main.c:234:6:task2_handler	1
+../Core/Src/main.c:247:6:Error_Handler	1
