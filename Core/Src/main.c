@@ -21,7 +21,9 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "FreeRTOS.h"
+#include "task.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,7 +51,8 @@
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 /* USER CODE BEGIN PFP */
-
+void task1_handler(void* parameters);
+void task2_handler(void* parameters);
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
@@ -65,7 +68,10 @@ int main(void)
 {
 
   /* USER CODE BEGIN 1 */
+	TaskHandle_t task1_handle;
+	TaskHandle_t task2_handle;
 
+	BaseType_t status;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -87,7 +93,26 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+  TaskFunction_t pxTaskCode1 = task1_handler;					// Pointer to the task handler
+  const char* const pcName1 = "Task-1";							// Descriptive name to the task
+  const configSTACK_DEPTH_TYPE uxStackDepth1 = 200;							// 200*32 bits
+  void* const pvParameters1 = "Hello World from Task-1";	// Parameter to be passed
+  UBaseType_t uxPriority1 = 2;
 
+  status = xTaskCreate(pxTaskCode1, pcName1, uxStackDepth1, pvParameters1, uxPriority1, &task1_handle);
+  configASSERT(status == pdPASS);
+
+  TaskFunction_t pxTaskCode2 = task1_handler;					// Pointer to the task handler
+  const char* const pcName2 = "Task-1";							// Descriptive name to the task
+  const configSTACK_DEPTH_TYPE uxStackDepth2 = 200;							// 200*32 bits
+  void* const pvParameters2 = "Hello World from Task-2";	// Parameter to be passed
+  UBaseType_t uxPriority2 = 2;
+
+  status = xTaskCreate(pxTaskCode2, pcName2, uxStackDepth2, pvParameters2, uxPriority2, &task2_handle);
+  configASSERT(status == pdPASS);
+
+  // Start the freeRTOS scheduler
+  vTaskStartScheduler();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -198,7 +223,19 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void task1_handler(void* parameters){
 
+	while(1){
+		printf("%s\n",(char*)parameters);
+	}
+}
+
+void task2_handler(void* parameters){
+
+	while(1){
+		printf("%s\n",(char*)parameters);
+	}
+}
 /* USER CODE END 4 */
 
 /**
