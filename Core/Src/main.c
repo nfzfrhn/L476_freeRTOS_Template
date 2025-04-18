@@ -44,7 +44,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+#define DWT_CTRL		(*(volatile uint32_t*)0xE0001000)
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -93,6 +93,13 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   /* USER CODE BEGIN 2 */
+
+  // Enable the CYCCNT counter
+  DWT_CTRL |= (1<<0);
+
+  SEGGER_SYSVIEW_Conf();
+  SEGGER_SYSVIEW_Start();
+
   TaskFunction_t pxTaskCode1 = task1_handler;					// Pointer to the task handler
   const char* const pcName1 = "Task-1";							// Descriptive name to the task
   const configSTACK_DEPTH_TYPE uxStackDepth1 = 200;							// 200*32 bits
@@ -227,7 +234,7 @@ void task1_handler(void* parameters){
 
 	while(1){
 		printf("%s\n",(char*)parameters);
-		taskYIELD();
+		//taskYIELD();
 	}
 }
 
@@ -235,7 +242,7 @@ void task2_handler(void* parameters){
 
 	while(1){
 		printf("%s\n",(char*)parameters);
-		taskYIELD();
+		//taskYIELD();
 	}
 }
 /* USER CODE END 4 */

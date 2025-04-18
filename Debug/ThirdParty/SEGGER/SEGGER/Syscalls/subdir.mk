@@ -5,23 +5,23 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.c 
+../ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.c 
 
 OBJS += \
-./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.o 
+./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.o 
 
 C_DEPS += \
-./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.d 
+./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/%.o ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/%.su ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/%.cyclo: ../ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/%.c ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/subdir.mk
+ThirdParty/SEGGER/SEGGER/Syscalls/%.o ThirdParty/SEGGER/SEGGER/Syscalls/%.su ThirdParty/SEGGER/SEGGER/Syscalls/%.cyclo: ../ThirdParty/SEGGER/SEGGER/Syscalls/%.c ThirdParty/SEGGER/SEGGER/Syscalls/subdir.mk
 	arm-none-eabi-gcc "$<" -mcpu=cortex-m4 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32L476xx -c -I../Core/Inc -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/SEGGER/Config" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/SEGGER/OS" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/SEGGER/Patch" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/SEGGER/SEGGER" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS/include" -I"D:/ST_Workspace_RTOS/L476_RTOS_Template/ThirdParty/FreeRTOS" -I../Drivers/STM32L4xx_HAL_Driver/Inc -I../Drivers/STM32L4xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32L4xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -fcyclomatic-complexity -MMD -MP -MF"$(@:%.o=%.d)" -MT"$@" --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -o "$@"
 
-clean: clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-GCC-2f-ARM_CM4F
+clean: clean-ThirdParty-2f-SEGGER-2f-SEGGER-2f-Syscalls
 
-clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-GCC-2f-ARM_CM4F:
-	-$(RM) ./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.cyclo ./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.d ./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.o ./ThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/port.su
+clean-ThirdParty-2f-SEGGER-2f-SEGGER-2f-Syscalls:
+	-$(RM) ./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.cyclo ./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.d ./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.o ./ThirdParty/SEGGER/SEGGER/Syscalls/SEGGER_RTT_Syscalls_GCC.su
 
-.PHONY: clean-ThirdParty-2f-FreeRTOS-2f-portable-2f-GCC-2f-ARM_CM4F
+.PHONY: clean-ThirdParty-2f-SEGGER-2f-SEGGER-2f-Syscalls
 
